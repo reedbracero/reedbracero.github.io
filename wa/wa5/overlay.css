@@ -1,0 +1,84 @@
+/* General Reset */
+body {
+    background-color: purple;
+    margin: 0;
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center content horizontally */
+}
+
+/* Header Styling */
+h1 {
+    text-align: center;
+    background-color: rgb(188, 8, 140);
+    color: white;
+    padding: 10px;
+    width: 100%;
+}
+
+/* Center the image container */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh; /* Adjust height as needed */
+}
+
+/* Image Container */
+.image {
+
+        position: relative;
+        width: 600px;
+        height: 600px;
+        background-image: url("3-Tasten-Maus_Microsoft.jpg"); /* Static Image */
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        border: 5px dotted rgb(0, 234, 97);
+        transition: background-image 0.5s ease; /* Smooth transition */
+    
+}
+
+/* Overlay Effect */
+.image::before {
+    content: "SCORE : 80/100" ;
+    position: absolute;
+    top: 500px;
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+    background-color: rgba(47, 255, 0, 0.8); /* Dark semi-transparent overlay */
+    transition: background-image 0.5s ease; /* Smooth transition */
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
+.image::after {
+    content: "Trick : Backboard 270 Out";
+    position: absolute;
+    top: 450px; /* Positioned below first overlay */
+    left: 68%;
+    
+    font-size: 32px;
+    font-weight: bold;
+    color: rgb(25, 176, 231);
+    text-align: center;
+    
+    background-color: rgba(36, 17, 180, 0.8); /* Red overlay */
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
+
+/* Play the GIF on hover */
+.image:hover {
+    background-image: url('reedboard.gif'); /* Animated GIF on hover */
+}
+/* Footer Styling */
+footer {
+    text-align: center;
+    background-color: blue;
+    color: white;
+    padding: 10px;
+    width: 100%;
+}
