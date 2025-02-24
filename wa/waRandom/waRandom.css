@@ -1,0 +1,64 @@
+body{
+    font-family: 'Helvetica neue', Arial, 'sans serif';
+    font-size: 40px;
+    text-align: center;
+    font-style: white;
+    background-image: repeating-radial-gradient(blue, purple 20%, lavender 40%);
+    color: azure;
+}
+
+#narrowScreen{
+    background-color: rgb(128, 0, 122);
+    border-radius: 25px;
+    }
+    
+    @media screen and (max-width: 600px) {
+        #narrowScreen {
+            background-color: rgb(0, 157, 128);
+            font-size : 30px;
+        }
+    }
+    
+    #wideScreen{
+    background-color: rgb(129, 0, 155);
+    border-radius: 50px;
+    }
+    
+    @media screen and (min-width: 600px) {
+        #wideScreen {
+            background-color: rgb(0, 102, 85);
+            font-size : 30px;
+        }
+    }
+    
+    #grid-parent{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows:  1fr 1fr 1fr 1fr;
+    
+    }
+    
+    #grid-parent h1{
+        background-color: grey;
+        padding:3vw 5vh;
+        margin:5vw;
+        border-radius: 90px;
+        /*background-image: linear-gradient(red, yellow, green);*/
+        background-image: ulr("ducks.jpg");
+        
+    }
+
+    @media screen and (max-width: 600px) {
+        #grid-parent h1 {
+       color: rgb(0, 102, 85);
+       font-size : 30px;
+        }
+    }
+    #no0{
+        grid-column-start: 2;
+        grid-column-end: 3;
+    }
+
+    footer{
+        border: 0.2em solid black;
+    }
