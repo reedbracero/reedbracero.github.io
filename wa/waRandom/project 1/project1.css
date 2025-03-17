@@ -1,20 +1,31 @@
 
 body{
   margin: 0;
+  font-family: unset;
 }
 
 header{
-  font-family: "Lucida Console", "Courier New", monospace;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   text-align: center;
 }
 
 h1{
   font-size: 60px;
+  font-family: cursive;
 }
+
 h2{
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: fantasy;
   font-size: 30px;
 }
+
+h3{
+  font-size: 30px;
+  color: white;
+  font-family: Impact;
+}
+
+
 
 img {
   max-width: 100%;
@@ -64,7 +75,12 @@ img {
   color: white;
   text-decoration: none;
   padding: .5em 1em;
-  display: block;
+  transition: color 1s;
+}
+
+#nav a:hover {
+color: rgb(118, 65, 130);
+background-color: white;
 }
 
 .feature {
@@ -74,7 +90,7 @@ img {
 
 @media screen and (min-width: 400px) {
   html{
-    scroll-padding-top: 80px;
+    scroll-padding-top: 50px;
   }
   body{
     background-color: rgb(234, 174, 255);
@@ -86,7 +102,7 @@ img {
 
 @media screen and (max-width: 1500px) {
   html{
-    scroll-padding-top: 150px;
+    scroll-padding-top: 80px;
   }
   body{
     background-color: rgb(84, 133, 143);;
