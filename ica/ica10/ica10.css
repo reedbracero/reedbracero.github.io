@@ -1,0 +1,32 @@
+header{
+    text-align: center;
+    color: blueviolet;
+    font-size: 40px;
+}
+
+body{
+    background-color: aquamarine;
+}
+
+#container {
+    background-color: rgb(126, 34, 34);
+    background-size: 2em 2em;
+
+}
+
+#ball {
+    width: 200px;
+    height: 200px;
+    background-color: blue;
+    border-radius: 100px;
+    cursor: pointer;
+    position: fixed;
+}
+
+footer{
+    text-align: center;
+
+}
+button{
+    align-items: center;
+}
