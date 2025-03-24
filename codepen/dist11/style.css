@@ -1,0 +1,87 @@
+@property --_x {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0; 
+}
+.container {
+  --s: 1em;     /* control the size */
+  --c: #570096; /* the active color */
+  
+  display: grid;
+  gap: 8px;
+  position: relative;
+}
+.container:before {
+  content: "";
+  position: absolute;
+  position-anchor: --checkbox;
+  height: calc(var(--s)/2);
+  aspect-ratio: 1;
+  --_y: clamp(-1,var(--_x)*9999,1);  /* until better support for sign() */
+  left: max(-80px,var(--s)/4 - var(--_x)*var(--_y)*1px);
+  top: calc(anchor(top) + var(--s)/4);
+  background: var(--c);
+  border-radius: 50%;
+  transition: top .4s linear,--_x cubic-bezier(.1,3000,.7,3000) .4s;
+  pointer-events: none;
+}
+label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+input {
+  height: var(--s);
+  aspect-ratio: 1;
+  border: calc(var(--s)/8) solid #000000;
+  border-radius: 50%;
+  outline-offset: calc(var(--s)/10);
+  appearance: none;
+  cursor: pointer;
+  font: inherit;
+  margin: 0;
+  transition: .3s .1s;
+}
+input:checked {
+  border-color: var(--c);
+  anchor-name: --checkbox;
+}
+.container:not(:has(input:checked)):before {
+  opacity: 0;
+}
+/* The hacky part ... */
+.container:has(label:nth-child(1) input:checked):before {--_x:.01}
+.container:has(label:nth-child(2) input:checked):before {--_x:.02}
+.container:has(label:nth-child(3) input:checked):before {--_x:.03}
+.container:has(label:nth-child(4) input:checked):before {--_x:.04}
+.container:has(label:nth-child(5) input:checked):before {--_x:.05}
+/* and so on ..*/
+
+@media print {
+  input[type=radio] {
+    appearance: auto;
+    background: none;
+  }
+}
+
+@supports not (anchor-name:--_) {
+  .container:before {
+    display: none;
+  }
+  input:checked {
+    padding: calc(var(--s)/8);
+    background: var(--c) content-box;
+  }
+}
+
+body {
+  margin:0;
+  min-height:100vh;
+  display: grid;
+  place-content: center;
+  font-family: system-ui, sans-serif;
+  font-size: 36px;
+  background-color: cadetblue;
+  color: aliceblue;
+}
