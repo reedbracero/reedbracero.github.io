@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="wa12.css">
+    <title>Best Quote Generator</title>
+</head>
+<body>
+    <div class="app">
+        <header>Simpson Character Quotes</header>
+        <section class="quotes">
+          <div class="quote-text" id="js-quote-text"></div>
+          <div class="quote-text" id="js-answer-text"></div>
+          <div class="quote-text"> <img id="js-character-img" src="" alt="Character Image"></div>
+        </section>
+        <section class="controls" >
+          <button type="button" id="js-new-quote" class="new-quote button">
+            Give me a quote
+          </button>
+          <button type="button" id="js-show-answer" class="answer button">
+            Whose this quote by?
+          </button>
+          <button type="button" id="js-show-img" class="photo button">
+            See a photo of the character
+          </button>
+        </section>
+      </div>
+
+      <footer> My extension for this page was making a Simpsons API that shows a quote from a character and the ablity to see an image of the character.
+        <br> For some reason, I could not get my footer to go below the function without everything breaking
+        <br> I had a little trouble at first getting the API to seperate the different sections but Ari was able to help me in class
+      </footer>
+      <script>
+
+var newBtn = document.querySelector('#js-new-quote').addEventListener('click', getQuote);
+var answerBtn = document.querySelector('#js-show-answer').addEventListener('click', () => {
+  displayAnswer(current.character);
+});
+var imgBtn = document.querySelector('#js-show-img').addEventListener('click', () => {
+  displayImage(current.image);
+});
+
+var endpoint = "https://thesimpsonsquoteapi.glitch.me/quotes";
+
+let current = {
+  quote: "",
+  character: "",
+  image: "",
+};
+
+async function getQuote() {
+    try {
+        const response = await fetch(endpoint);
+
+        if (!response.ok) {
+            throw Error(response.statusText);
+        }
+
+        const json = await response.json();
+        console.log(json);
+        displayQuote(json[0].quote);
+        emptyAnswer();
+        emptyImg();
+
+
+
+        current.quote = json[0].quote;
+        current.character = json[0].character;
+        current.image = json[0].image; 
+
+     } catch(err) {
+        console.log(err);
+        alert('Fail');
+     }
+ }
+
+  function emptyAnswer() {
+    const answerText = document.querySelector('#js-answer-text');
+    answerText.textContent = "";
+  }
+
+  function displayQuote(quote) {
+    const quoteText = document.querySelector('#js-quote-text');
+    quoteText.textContent = quote;
+  }
+
+  function displayAnswer(character) {
+    const answerText = document.querySelector('#js-answer-text');
+    answerText.textContent = character;
+  }
+
+  function emptyImg() {
+    const imgEl = document.querySelector('#js-character-img');
+    imgEl.src = "";
+    imgEl.style.display = "none";
+  }
+
+  function displayImage(imageUrl) {
+  const imgEl = document.querySelector('#js-character-img');
+  imgEl.src = imageUrl;
+  imgEl.style.display = "block"; 
+}
+
+  getQuote();
+
+      </script>
+</body>
+</html>
