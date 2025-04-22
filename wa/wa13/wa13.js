@@ -1,4 +1,4 @@
-//#1
+// Problem 1
 const employeeData = [
     {
         "name": "Sam",
@@ -22,52 +22,54 @@ const employeeData = [
         "raiseEligible": false,
     }
 ];
-  
+
 console.log("Problem 1", employeeData);
 
-//#2
+// Problem 2 
 const company = {
-        "companyName": "Tech Stars",
-        "website": "www.techstars.com",
-        "employees": employeeData,
+    companyName: "Tech Stars",
+    website: "www.techstars.com",
+    employees: structuredClone(employeeData)
 };
 
-console.log("Problem 2",company)
+console.log("Problem 2", company);
 
-//#3
+// Problem 3
 const newEmployee = {
-        "name": "Anna",
-        "department": "Tech",
-        "designation": "Executive",
-        "salary": 25600,
-        "raiseEligible": false,
+    name: "Anna",
+    department: "Tech",
+    designation: "Executive",
+    salary: 25600,
+    raiseEligible: false,
 };
 
 company.employees.push(newEmployee);
 
-console.log("Problem 3",company);
+console.log("Problem 3", company);
 
-//#4
+// Problem 4
 let totalSalary = 0;
-
 company.employees.forEach(employee => {
-  totalSalary += employee.salary;
+    totalSalary += employee.salary;
 });
+console.log("Problem 4 Total Salary of Employees", totalSalary);
 
-console.log("Problem 4", totalSalary);
-
-//#5
+// Problem 5
 function raises(company) {
     company.employees.forEach(employee => {
-      if (employee.raiseEligible) {
-        employee.salary *= 1.10; 
-        employee.raiseEligible = false;
-      }
+        if (employee.raiseEligible) {
+            employee.salary *= 1.10;
+            employee.raiseEligible = false;
+        }
     });
-  }
-  
-  raises(company);
-  
-  console.log("Problem 5", company);
-  
+}
+raises(company);
+console.log("Problem 5", company);
+
+// Problem 6
+const wfm = ['Anna', 'Sam'];
+company.employees.forEach(employee => {
+    employee.wfh = wfm.includes(employee.name);
+});
+console.log("Problem 6", company);
 
