@@ -2,17 +2,60 @@ const deployHookBtn = document.getElementById('deploy-hook');
 const hookZone = document.getElementById('hook-zone');
 const savedNumbers = document.getElementById('saved-numbers');
 const movingNumbers = document.getElementById('moving-numbers');
+const hookLine = document.getElementById('hook-line');
+const ctx = hookLine.getContext('2d');
 
 let hookDeployed = false;
-let phoneDigits = []; // Store digits here
+let phoneDigits = [];
 
-// Deploy Hook button
+// For mouse position tracking
+let mouseX = 0;
+let mouseY = 0;
+
+// Resize canvas to always match window
+function resizeCanvas() {
+    hookLine.width = window.innerWidth;
+    hookLine.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+// Track mouse movement
+document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+});
+
+// Animate the hook line
+function drawLine() {
+    ctx.clearRect(0, 0, hookLine.width, hookLine.height);
+
+    if (hookDeployed) {
+        const btnRect = deployHookBtn.getBoundingClientRect();
+        const startX = btnRect.left + btnRect.width / 2;
+        const startY = btnRect.top + btnRect.height / 2;
+
+        ctx.beginPath();
+        ctx.moveTo(startX, startY);
+        ctx.lineTo(mouseX, mouseY);
+        ctx.strokeStyle = 'red'; // Hook line color
+        ctx.lineWidth = 2;
+        ctx.stroke();
+    }
+
+    requestAnimationFrame(drawLine);
+}
+drawLine(); // Start the drawing loop
+
+// -------------------------
+// (Your other code below this)
+// -------------------------
+
 deployHookBtn.addEventListener('click', () => {
     hookDeployed = true;
     document.body.classList.add('hook-cursor');
 });
 
-// Create empty boxes for the phone number
 function createPhoneBoxes() {
     savedNumbers.innerHTML = '';
 
@@ -21,7 +64,6 @@ function createPhoneBoxes() {
         box.classList.add('number-box');
         savedNumbers.appendChild(box);
 
-        // Add dashes after 3rd and 6th digit
         if (i === 2 || i === 5) {
             const dash = document.createElement('div');
             dash.classList.add('dash');
@@ -31,7 +73,6 @@ function createPhoneBoxes() {
     }
 }
 
-// Update the boxes when user captures a number
 function updatePhoneBoxes() {
     const boxes = document.querySelectorAll('.number-box');
     phoneDigits.forEach((digit, index) => {
@@ -41,42 +82,48 @@ function updatePhoneBoxes() {
     });
 }
 
-// Create moving number
 function createMovingNumber(num) {
     const number = document.createElement('div');
     number.classList.add('number');
     number.textContent = num;
 
-    // Set random start position
     number.style.top = Math.random() * (movingNumbers.clientHeight - 40) + 'px';
     number.style.left = Math.random() * (movingNumbers.clientWidth - 40) + 'px';
 
-    // Move the number around randomly
     const moveInterval = setInterval(() => {
         number.style.top = Math.random() * (movingNumbers.clientHeight - 40) + 'px';
         number.style.left = Math.random() * (movingNumbers.clientWidth - 40) + 'px';
     }, 1500);
 
-    // Capture the number if clicked
     number.addEventListener('click', () => {
         if (hookDeployed && phoneDigits.length < 10) {
             phoneDigits.push(num);
             updatePhoneBoxes();
-            number.remove(); // Remove clicked number
-            clearInterval(moveInterval); // Stop moving it
-            createMovingNumber(num); // Immediately spawn a replacement
+            number.remove();
+            clearInterval(moveInterval);
+            createMovingNumber(num);
+    
+            // Disable hook after catching
+            hookDeployed = false;
+            document.body.classList.remove('hook-cursor');
         }
     });
+    
 
     movingNumbers.appendChild(number);
 }
 
 // Initialize everything
 createPhoneBoxes();
-
-// Spawn 5 copies of each 0-9
 for (let i = 0; i <= 9; i++) {
     for (let j = 0; j < 5; j++) {
         createMovingNumber(i);
     }
 }
+
+const resetPhoneBtn = document.getElementById('reset-phone');
+
+resetPhoneBtn.addEventListener('click', () => {
+    phoneDigits = []; // Clear saved digits
+    createPhoneBoxes(); // Recreate empty boxes
+});

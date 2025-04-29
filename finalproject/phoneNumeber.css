@@ -1,0 +1,97 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    font-family: fantasy;
+    text-align: center;
+    background-image: linear-gradient(rgb(0,0,255), rgb(0, 170, 255), rgb(0, 162, 255), rgb(141, 153, 76));
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+#hookButton {
+    padding: 10px 10px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 18px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: white;
+    border: none;
+}
+
+#hookButton:hover{
+    background-color: aquamarine;
+}
+
+#resetButton{
+    padding: 10px 10px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 18px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: gray;
+    border: none;
+}
+
+#resetButton:hover{
+    background-color: red;
+}
+
+#numberStorage{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
+    gap: 10px;
+    margin-top: 10px;
+    height: 60px;
+}
+
+.numberBox{
+    width: 40px;
+    height: 50px;
+    border-bottom: 2px solid black;
+    text-align: center;
+    line-height: 50px;
+    font-size: 28px;
+}
+
+.dash {
+    font-size: 28px;
+    margin: 0 5px;
+}
+
+#movingNumbers{
+    position: relative;
+    width: 100%;
+    height: 300px;
+    margin-top: 20px; 
+}
+
+#hookLine{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+}
+
+#floatingNumbers {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    background-image: url('coral reed.jpeg');
+    background-size: contain;
+    background-position: center;
+    background-repeat: repeat;
+    overflow: hidden;
+    border: 6px solid black;
+}
