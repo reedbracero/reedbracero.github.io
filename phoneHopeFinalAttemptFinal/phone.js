@@ -22,7 +22,7 @@ const fishIndex = {
 'blue fish.png': 6,
 'purple fish.webp': 7,
 'yellow fish.png': 8,
-'silver fish.png': 9,
+'silver fish.png': 9
 };
 
 function resizeCanvas() {
